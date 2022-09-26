@@ -8,11 +8,11 @@ const Home = () => {
             style={{ height: '100%', width: '100%' }}
         >
             <Row className="mb-3">
-                <Col><h1>SHOP APP</h1></Col>
+                <Col><h1 className="display-2">SHOP APP</h1></Col>
             </Row>
             <Row>
                 <Col>
-                    <Button><Link to='/store' style={{ color: 'white', textDecoration: 'none' }}>shop now</Link></Button>
+                    <Button className="btn btn-dark"><Link to='/store' style={{ color: 'white', textDecoration: 'none' }}>shop now</Link></Button>
                 </Col>
             </Row>
         </Container>

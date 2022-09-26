@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Store from './pages/Store'
 import About from './pages/About'
 import { ShoppingCartProvider } from './context/ShoppingCartContext'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/about' element={<About />} />
         </Routes>
       </Container>
+      <Footer />
     </ShoppingCartProvider>
   </>
 }

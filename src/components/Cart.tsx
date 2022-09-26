@@ -25,7 +25,7 @@ const Cart = () => {
                 position: 'relative',
             }
             }
-            variant='outline-primary'
+            variant='outline-light'
             className='rounded-circle'
             onClick={handleCartClick}
         >

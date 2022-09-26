@@ -8,7 +8,7 @@ const Navbar = () => {
         itemsQuantity,
     } = useShoppingCart()
 
-    return <BootstrapNav sticky='top' className='bg-white shadow-sm mb-3'>
+    return <BootstrapNav sticky='top' className='navbar-dark bg-dark shadow-sm mb-3'>
         <Container>
             <Nav className='me-auto'>
                 <Nav.Link to={'/'} as={NavLink}  >
