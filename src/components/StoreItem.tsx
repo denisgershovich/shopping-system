@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { formatCurrency } from '../util/FormatCurrency'
 import { useShoppingCart } from "../context/ShoppingCartContext"
+import Spinner from 'react-bootstrap/Spinner';
 
 type StoreItemProps = {
     id: number
@@ -10,6 +12,7 @@ type StoreItemProps = {
 }
 
 const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
+    const [loaded, setLoaded] = useState(false)
     const {
         getItemQuantity,
         increaseCartQuantity,
@@ -17,12 +20,20 @@ const StoreItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
         removeFromCart
     } = useShoppingCart()
     const quantity = getItemQuantity(id)
+    const handleImageLoading = () => {
+        setLoaded(true)
+    }
     return <Card className="h-100">
+        {!loaded && <div className='d-flex justify-content-center p-5'>
+            <Spinner animation="border" role="status">
+            </Spinner>
+        </div>}
         <Card.Img
             variant="top"
             src={imgUrl}
             height="200px"
-            style={{ objectFit: "cover" }}
+            style={{ display: loaded ? '' : 'none', objectFit: "cover" }}
+            onLoad={handleImageLoading}
         />
         <Card.Body className="d-flex flex-column">
             <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">
