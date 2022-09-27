@@ -1,2 +1,2 @@
 # shopping-system
-React + TypeScript
+React with TypeScript
