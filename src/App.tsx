@@ -6,6 +6,7 @@ import Store from './pages/Store'
 import SignUp from './pages/SignUp'
 import { ShoppingCartProvider } from './context/ShoppingCartContext'
 import Footer from './components/Footer'
+import Login from './pages/Login'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/store' element={<Store />} />
           <Route path='/signUp' element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </Container>
       <Footer />
