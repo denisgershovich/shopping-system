@@ -1,5 +1,6 @@
 import { useRef, useState } from "react"
 import { Container, Button, Card, Form } from "react-bootstrap"
+import { post } from '../services/api.service'
 
 const SignUpForm = () => {
     const [showPasswordError, setShowPasswordError] = useState(false)
@@ -8,10 +9,18 @@ const SignUpForm = () => {
     const passwordRef = useRef<HTMLInputElement>(null)
     const passwordConfirmRef = useRef<HTMLInputElement>(null)
 
-    const handleOnSubmit = (event: React.SyntheticEvent): void => {
+    const handleOnSubmit = async (event: React.SyntheticEvent): Promise<number> => {
         event.preventDefault()
-        const data = new FormData(event.target as HTMLFormElement) 
-        console.log(Object.fromEntries(data.entries()))
+        const data = new FormData(event.target as HTMLFormElement)
+        const { email, password, password2} = Object.fromEntries(data.entries())
+        const user = { email, password, password2 }
+        const res = await post('/post', user)
+        if(res === 201){
+            console.log('sign up successful')
+        }else{
+            console.log('sign up failed')
+        }
+        return res
     }
 
     const onHandleChange = () => {
@@ -20,8 +29,8 @@ const SignUpForm = () => {
             setShowPasswordError(false)
             setIsValid(true)
             return
-        } 
-        if (passwordRef.current?.value !== passwordConfirmRef.current?.value){
+        }
+        if (passwordRef.current?.value !== passwordConfirmRef.current?.value) {
             setShowPasswordError(true)
         }
         setIsValid(false)
@@ -29,6 +38,7 @@ const SignUpForm = () => {
 
     return <Container fluid className='d-flex align-items-center justify-content-center bg-image' >
         <Card className='m-4' style={{ minWidth: '450px' }}>
+            <button onClick={handleOnSubmit}>send</button>
             <Card.Body className='px-5'>
                 <h2 className="text-uppercase text-center mb-4">Create an account</h2>
                 <Form onSubmit={handleOnSubmit}
@@ -50,8 +60,8 @@ const SignUpForm = () => {
                         <Form.Control name='password2' type="password" placeholder="Password" ref={passwordConfirmRef} />
                     </Form.Group>
                     <div className="m-2" style={{ height: '1rem' }}>
-                        {showPasswordError  && <Form.Text className=" text-danger ">
-                            Password and Confirm Password does not match.    
+                        {showPasswordError && <Form.Text className=" text-danger ">
+                            Password and Confirm Password does not match.
                         </Form.Text>}
                     </div>
                     <Button type="submit" className='mb-4 mt-2 w-100 gradient-custom-4' size='lg' disabled={!isValid}>Register</Button>
